@@ -163,7 +163,7 @@ const choiceId = (questionId, choiceIndex) =>
           {
             question_set_id: questionSet.question_set_id,
             user_id: userByUsername.demo_host,
-            join_code: 'DEMO01',
+            join_code: '123456',
             status: 'CLOSED',
           },
         ],
@@ -174,7 +174,7 @@ const [gameSession] = await queryInterface.sequelize.query(
         `
         SELECT session_id
         FROM game_sessions
-        WHERE join_code = 'DEMO01'
+        WHERE join_code = '123456'
         `,
         {
           type: QueryTypes.SELECT,
@@ -286,7 +286,7 @@ await transaction.commit();
 
 async down(queryInterface) {
     await queryInterface.bulkDelete('game_sessions', {
-      join_code: 'DEMO01',
+      join_code: '123456',
     });
   },
 };
