@@ -16,6 +16,22 @@ username: {
         unique: true,
       },
 
+school_id: {
+  type: Sequelize.STRING(50),
+  allowNull: true,
+},
+
+full_name: {
+  type: Sequelize.STRING(100),
+  allowNull: true,
+},
+
+email: {
+  type: Sequelize.STRING(255),
+  allowNull: true,
+},
+
+
 role: {
         type: Sequelize.STRING(20),
         allowNull: false,
