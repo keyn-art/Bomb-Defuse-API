@@ -1,4 +1,4 @@
-# [Your Game Title] API
+# Bomb-Defuse-API
 
 Backend API for **[Bomb-Defuse]**, a tournament game for the SorSU Bulan Campus library.
 CS 313 Software Engineering 1, A.Y. 2026-2027.

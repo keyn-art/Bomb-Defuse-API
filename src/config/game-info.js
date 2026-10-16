@@ -8,7 +8,7 @@ module.exports = {
   team: 'Group9(3-1)',            // your group's name and section, for example Bookworms (3-1)
   developer: 'keyn-art',       // YOUR GitHub username: this build is yours
   description: 'Players work together to defuse a bomb by solving puzzles before time runs out.',     // one sentence about how the game is played
-  min_players: 1,               // change to the limits your game is designed for
+  min_players: 10,               // change to the limits your game is designed for
   max_players: 30,
   version: pkg.version,         // read from package.json, do not edit here
 };
