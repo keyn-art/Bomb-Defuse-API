@@ -26,19 +26,65 @@
 //    WHERE s.status = 'CLOSED'
 //      AND (CAST(:since AS timestamptz) IS NULL OR s.ended_at > :since)
 //    ORDER BY s.ended_at, p.score DESC
+
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models');
 
 async function findFinishedGamePlayers(since) {
-  const sql = `
-    SELECT NULL AS session_code
-     WHERE FALSE
-  `; // <- replace this placeholder with your query
+  const sinceFilter = since ? 'AND 1 = 0' : '';
 
-  return sequelize.query(sql, {
+const sql = `
+    SELECT
+      gs.join_code AS session_code,
+      NULL AS started_at,
+      NULL AS ended_at,
+      u.username AS school_id,
+      p.nickname,
+      p.score,
+
+CASE
+        WHEN COUNT(DISTINCT a.question_id)
+             >= COUNT(DISTINCT q.question_id)
+        THEN true
+        ELSE false
+      END AS completed
+
+FROM game_sessions AS gs
+
+INNER JOIN players AS p
+      ON p.session_id = gs.session_id
+
+INNER JOIN users AS u
+      ON u.user_id = p.user_id
+
+LEFT JOIN questions AS q
+      ON q.question_set_id = gs.question_set_id
+
+LEFT JOIN answers AS a
+      ON a.player_id = p.player_id
+      AND a.question_id = q.question_id
+
+WHERE gs.status = 'CLOSED'
+      ${sinceFilter}
+
+GROUP BY
+      gs.join_code,
+      u.username,
+      p.player_id,
+      p.nickname,
+      p.score
+
+ORDER BY
+      gs.join_code,
+      p.score DESC,
+      p.nickname ASC;
+  `;
+
+return sequelize.query(sql, {
     type: QueryTypes.SELECT,
-    replacements: { since: since ? since.toISOString() : null },
   });
 }
 
-module.exports = { findFinishedGamePlayers };
+module.exports = {
+  findFinishedGamePlayers,
+};

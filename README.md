@@ -60,11 +60,21 @@ Base URL: `http://localhost:3001/api/v1`
 
 ## What "completed" means in my game
 
-[One or two sentences: when does a player count as having completed a game? For example: "A player completed the game when they answered every question, even if some answers were wrong or timed out."]
+A player is completed when they answered every question, even if answers were wrong or timed out.
+
 
 ## Tables
 
-[List your tables, one line each, in the order of your migrations.]
+| Table | Purpose |
+|---|---|
+| `users` | Stores registered users, including their username, role, and account information. |
+| `question_sets` | Stores collections of questions created or owned by users. |
+| `questions` | Stores individual questions that belong to a question set. |
+| `choices` | Stores the possible answer choices for each question. |
+| `game_sessions` | Stores games created from question sets, including the unique join code, host, and game status. |
+| `players` | Stores users who joined a game session, including their nickname, score, and defuse progress. |
+| `answers` | Stores the answers submitted by players, including whether each answer was correct and the points earned. |
+
 
 ## Database scripts
 
