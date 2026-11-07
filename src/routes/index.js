@@ -12,8 +12,7 @@ router.use('/results', require('./results.routes'));
 // From here on, req.user says who is calling (or null).
 router.use(currentUser);
 
-// Mount your modules here, one line each. For example:
-// router.use('/question-sets', require('./question-set.routes'));
-// router.use('/sessions', require('./session.routes'));
+// Mount your modules here, one line each.
+router.use('/question-sets', require('./question-set.routes'));
 
 module.exports = router;
