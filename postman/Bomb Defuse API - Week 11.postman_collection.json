@@ -8,17 +8,6 @@
   },
   "item": [
     {
-      "name": "New Request",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": ""
-        }
-      },
-      "response": []
-    },
-    {
       "name": "01 It works - create a set",
       "event": [
         {
