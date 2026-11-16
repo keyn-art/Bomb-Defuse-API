@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) =>
       question_set_id: { type: DataTypes.INTEGER, allowNull: false },
       user_id: { type: DataTypes.INTEGER, allowNull: false },
       join_code: { type: DataTypes.STRING(10), allowNull: false, unique: true },
-      status: { type: DataTypes.STRING(20), allowNull: false, defaultValue: 'waiting' },
+      status: { type: DataTypes.STRING(20), allowNull: false, defaultValue: 'LOBBY' },
     },
     { tableName: 'game_sessions', timestamps: false }
   );
