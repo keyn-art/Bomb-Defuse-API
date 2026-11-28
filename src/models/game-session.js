@@ -7,6 +7,8 @@ module.exports = (sequelize, DataTypes) =>
       user_id: { type: DataTypes.INTEGER, allowNull: false },
       join_code: { type: DataTypes.STRING(10), allowNull: false, unique: true },
       status: { type: DataTypes.STRING(20), allowNull: false, defaultValue: 'LOBBY' },
+      started_at: { type: DataTypes.DATE, allowNull: true },
+      ended_at: { type: DataTypes.DATE, allowNull: true },
     },
     { tableName: 'game_sessions', timestamps: false }
   );

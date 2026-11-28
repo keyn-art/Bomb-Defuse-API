@@ -63,6 +63,7 @@ function get(code) {
 }
 
 // Rule: only the host (or an admin) changes the status, and only forward.
+// The start and end times are recorded when the status changes.
 async function changeStatus(code, status, user) {
   const session = await findOrFail(code);
   if (!isOwner(session, user)) {
@@ -72,7 +73,10 @@ async function changeStatus(code, status, user) {
     throw conflict('INVALID_STATUS_CHANGE',
       `A game that is ${session.status} cannot become ${status}.`);
   }
-  return gameSessionRepository.update(session, { status });
+  const changes = { status };
+  if (status === 'RUNNING') changes.started_at = new Date();
+  if (status === 'CLOSED') changes.ended_at = new Date();
+  return gameSessionRepository.update(session, changes);
 }
 
 module.exports = { findOrFail, create, get, changeStatus };
